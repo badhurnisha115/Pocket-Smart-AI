@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>PocketSmart AI</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 230px;
+    height: 100vh;
+
+    background: #101828;
+    color: white;
+
+    padding: 30px 20px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 45px;
+}
+
+.logo span {
+    color: #6c63ff;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    padding: 14px 12px;
+    margin: 8px 0;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.menu li:hover,
+.menu .active {
+    background: #6c63ff;
+}
+
+
+/* MAIN */
+
+.main {
+    margin-left: 230px;
+    padding: 30px;
+}
+
+
+/* TOP */
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.top h1 {
+    font-size: 28px;
+}
+
+.profile {
+    background: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+}
+
+
+/* SUMMARY CARDS */
+
+.summary {
+    display: grid;
+
+    grid-template-columns:
+    repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 15px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.06);
+}
+
+.card small {
+    color: #777;
+}
+
+.card h2 {
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+.income {
+    border-top: 4px solid #22c55e;
+}
+
+.expense {
+    border-top: 4px solid #ef4444;
+}
+
+.balance {
+    border-top: 4px solid #6c63ff;
+}
+
+.saving {
+    border-top: 4px solid #f59e0b;
+}
+
+
+/* CONTENT GRID */
+
+.content {
+    display: grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap: 25px;
+}
+
+
+/* FORM */
+
+.form-card h2,
+.recommend-card h2,
+.expense-card h2,
+.goal-card h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+
+    margin-top: 14px;
+    margin-bottom: 6px;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #6c63ff;
+}
+
+.analyze {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #6c63ff;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.analyze:hover {
+    background: #554de0;
+}
+
+
+/* EXPENSE BARS */
+
+.expense-item {
+    margin-bottom: 20px;
+}
+
+.expense-title {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+}
+
+.bar {
+    height: 9px;
+
+    background: #eee;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+
+    width: 0%;
+
+    background: #6c63ff;
+
+    border-radius: 10px;
+
+    transition: 0.5s;
+}
+
+
+/* AI */
+
+.ai-box {
+    background: #f0efff;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    line-height: 1.7;
+}
+
+.ai-title {
+    color: #6c63ff;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+
+/* SAVINGS */
+
+.goal-bar {
+    height: 15px;
+
+    background: #eee;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin: 15px 0;
+}
+
+.goal-fill {
+    height: 100%;
+
+    width: 0%;
+
+    background: #22c55e;
+
+    transition: 0.6s;
+}
+
+.goal-text {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 14px;
+}
+
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+
+    margin-top: 35px;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+/* MOBILE */
+
+@media(max-width: 900px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .summary {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media(max-width: 600px) {
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .main {
+        padding: 15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        💰 Pocket<span>Smart</span>
+    </div>
+
+    <ul class="menu">
+
+        <li class="active">
+            🏠 Dashboard
+        </li>
+
+        <li>
+            💳 Budget
+        </li>
+
+        <li>
+            📊 Expenses
+        </li>
+
+        <li>
+            🎯 Savings
+        </li>
+
+        <li>
+            🤖 AI Assistant
+        </li>
+
+    </ul>
+
+</aside>
+
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+    <!-- TOP -->
+
+    <div class="top">
+
+        <div>
+
+            <h1>
+                Good Morning 👋
+            </h1>
+
+            <p>
+                Manage your money smartly.
+            </p>
+
+        </div>
+
+        <div class="profile">
+            👤 User
+        </div>
+
+    </div>
+
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary">
+
+
+        <div class="card income">
+
+            <small>
+                Monthly Income
+            </small>
+
+            <h2 id="incomeResult">
+                ₹0
+            </h2>
+
+        </div>
+
+
+        <div class="card expense">
+
+            <small>
+                Total Expenses
+            </small>
+
+            <h2 id="expenseResult">
+                ₹0
+            </h2>
+
+        </div>
+
+
+        <div class="card balance">
+
+            <small>
+                Available Balance
+            </small>
+
+            <h2 id="balanceResult">
+                ₹0
+            </h2>
+
+        </div>
+
+
+        <div class="card saving">
+
+            <small>
+                Savings Goal
+            </small>
+
+            <h2 id="goalResult">
+                ₹0
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+
+        <!-- INPUT -->
+
+        <div class="card form-card">
+
+            <h2>
+                💰 Monthly Budget
+            </h2>
+
+
+            <label>
+                Monthly Income
+            </label>
+
+            <input
+                type="number"
+                id="income"
+                placeholder="₹ 30,000"
+            >
+
+
+            <label>
+                Food
+            </label>
+
+            <input
+                type="number"
+                id="food"
+                placeholder="₹ 5,000"
+            >
+
+
+            <label>
+                Transport
+            </label>
+
+            <input
+                type="number"
+                id="transport"
+                placeholder="₹ 3,000"
+            >
+
+
+            <label>
+                Shopping
+            </label>
+
+            <input
+                type="number"
+                id="shopping"
+                placeholder="₹ 4,000"
+            >
+
+
+            <label>
+                Entertainment
+            </label>
+
+            <input
+                type="number"
+                id="entertainment"
+                placeholder="₹ 2,000"
+            >
+
+
+            <label>
+                Other
+            </label>
+
+            <input
+                type="number"
+                id="other"
+                placeholder="₹ 2,000"
+            >
+
+
+            <label>
+                Savings Goal
+            </label>
+
+            <input
+                type="number"
+                id="goal"
+                placeholder="₹ 5,000"
+            >
+
+
+            <button
+                class="analyze"
+                onclick="analyze()">
+
+                🤖 Analyze Budget
+
+            </button>
+
+        </div>
+
+
+
+        <!-- EXPENSE BREAKDOWN -->
+
+        <div class="card expense-card">
+
+            <h2>
+                📊 Expense Breakdown
+            </h2>
+
+
+            <div class="expense-item">
+
+                <div class="expense-title">
+
+                    <span>🍔 Food</span>
+
+                    <span id="foodText">
+                        ₹0
+                    </span>
+
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="bar-fill"
+                        id="foodBar">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="expense-item">
+
+                <div class="expense-title">
+
+                    <span>🚌 Transport</span>
+
+                    <span id="transportText">
+                        ₹0
+                    </span>
+
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="bar-fill"
+                        id="transportBar">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="expense-item">
+
+                <div class="expense-title">
+
+                    <span>🛍️ Shopping</span>
+
+                    <span id="shoppingText">
+                        ₹0
+                    </span>
+
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="bar-fill"
+                        id="shoppingBar">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="expense-item">
+
+                <div class="expense-title">
+
+                    <span>🎮 Entertainment</span>
+
+                    <span id="entertainmentText">
+                        ₹0
+                    </span>
+
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="bar-fill"
+                        id="entertainmentBar">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="expense-item">
+
+                <div class="expense-title">
+
+                    <span>📦 Other</span>
+
+                    <span id="otherText">
+                        ₹0
+                    </span>
+
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="bar-fill"
+                        id="otherBar">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- AI RECOMMENDATION -->
+
+        <div class="card recommend-card">
+
+            <h2>
+                🤖 AI Smart Recommendations
+            </h2>
+
+            <div
+                class="ai-box"
+                id="recommendation">
+
+                <div class="ai-title">
+                    PocketSmart AI
+                </div>
+
+                Enter your monthly income and expenses,
+                then click "Analyze Budget" to get
+                personalized recommendations.
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SAVINGS GOAL -->
+
+        <div class="card goal-card">
+
+            <h2>
+                🎯 Savings Goal
+            </h2>
+
+            <p>
+                Your progress towards your monthly goal
+            </p>
+
+
+            <div class="goal-bar">
+
+                <div
+                    class="goal-fill"
+                    id="goalBar">
+                </div>
+
+            </div>
+
+
+            <div class="goal-text">
+
+                <span id="saved">
+                    ₹0 saved
+                </span>
+
+                <span id="target">
+                    Goal: ₹0
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <footer>
+
+        PocketSmart AI © 2026
+
+        <br>
+
+        Smart budgeting for better financial decisions.
+
+    </footer>
+
+
+</main>
+
+
+
+<script>
+
+
+function value(id) {
+
+    let x =
+        parseFloat(
+            document.getElementById(id).value
+        );
+
+    return isNaN(x) ? 0 : x;
+
+}
+
+
+
+function money(x) {
+
+    return "₹" + x.toLocaleString("en-IN");
+
+}
+
+
+
+function analyze() {
+
+
+    let income = value("income");
+
+    let food = value("food");
+
+    let transport = value("transport");
+
+    let shopping = value("shopping");
+
+    let entertainment = value("entertainment");
+
+    let other = value("other");
+
+    let goal = value("goal");
+
+
+    let expenses =
+        food +
+        transport +
+        shopping +
+        entertainment +
+        other;
+
+
+    let balance =
+        income - expenses;
+
+
+
+    /* SUMMARY */
+
+    document.getElementById(
+        "incomeResult"
+    ).innerText = money(income);
+
+
+    document.getElementById(
+        "expenseResult"
+    ).innerText = money(expenses);
+
+
+    document.getElementById(
+        "balanceResult"
+    ).innerText = money(balance);
+
+
+    document.getElementById(
+        "goalResult"
+    ).innerText = money(goal);
+
+
+
+    /* EXPENSE BARS */
+
+    let categories = [
+
+        ["food", food],
+
+        ["transport", transport],
+
+        ["shopping", shopping],
+
+        ["entertainment", entertainment],
+
+        ["other", other]
+
+    ];
+
+
+    categories.forEach(function(item) {
+
+        let name = item[0];
+
+        let amount = item[1];
+
+
+        document.getElementById(
+            name + "Text"
+        ).innerText = money(amount);
+
+
+        let percent = 0;
+
+
+        if (expenses > 0) {
+
+            percent =
+                (amount / expenses) * 100;
+
+        }
+
+
+        document.getElementById(
+            name + "Bar"
+        ).style.width =
+            Math.min(percent, 100) + "%";
+
+    });
+
+
+
+    /* AI RECOMMENDATION */
+
+    let message = "";
+
+
+    if (income <= 0) {
+
+        message =
+            "⚠️ Please enter a valid monthly income.";
+
+    }
+
+    else if (balance < 0) {
+
+        message =
+            "🔴 Your expenses are higher than your income."
+            + "<br><br>"
+            + "Try reducing shopping, entertainment "
+            + "and other unnecessary expenses.";
+
+    }
+
+    else if (expenses > income * 0.8) {
+
+        message =
+            "🟠 More than 80% of your income is being spent."
+            + "<br><br>"
+            + "Try to reduce non-essential expenses "
+            + "and increase your monthly savings.";
+
+    }
+
+    else if (shopping > income * 0.15) {
+
+        message =
+            "🛍️ Your shopping expenses are relatively high."
+            + "<br><br>"
+            + "Set a fixed shopping limit and compare "
+            + "prices before making purchases.";
+
+    }
+
+    else if (food > income * 0.20) {
+
+        message =
+            "🍔 Your food expenses are relatively high."
+            + "<br><br>"
+            + "Meal planning and tracking food expenses "
+            + "may help control spending.";
+
+    }
+
+    else {
+
+        message =
+            "🟢 Your current spending is within a "
+            + "relatively manageable range."
+            + "<br><br>"
+            + "Keep tracking your expenses and maintain "
+            + "a regular savings habit.";
+
+    }
+
+
+    document.getElementById(
+        "recommendation"
+    ).innerHTML =
+        "<div class='ai-title'>"
+        + "🤖 PocketSmart AI"
+        + "</div>"
+        + message;
+
+
+
+    /* SAVINGS GOAL */
+
+    let percentage = 0;
+
+
+    if (goal > 0 && balance > 0) {
+
+        percentage =
+            (balance / goal) * 100;
+
+    }
+
+
+    percentage =
+        Math.min(percentage, 100);
+
+
+    document.getElementById(
+        "goalBar"
+    ).style.width =
+        percentage + "%";
+
+
+    document.getElementById(
+        "saved"
+    ).innerText =
+        money(Math.max(balance, 0))
+        + " available";
+
+
+    document.getElementById(
+        "target"
+    ).innerText =
+        "Goal: " + money(goal);
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
